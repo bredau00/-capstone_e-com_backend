@@ -7,6 +7,7 @@ const { getProduct } = require("../middleware/finders");
 
 const router = express.Router();
 
+
 // GET all products
 router.get("/", auth, async (req, res) => {
 try {
@@ -17,10 +18,12 @@ try {
 }
 });
 
+
 // GET one product
 router.get("/:id", [auth, getProduct], (req, res, next) => {
 res.send(res.product);
 });
+
 
 // CREATE a product
 router.post("/", auth, async (req, res, next) => {
@@ -42,6 +45,7 @@ try {
 }
 });
 
+
 // UPDATE a product
 router.put("/:id", [auth, getProduct], async (req, res, next) => {
     
@@ -59,6 +63,7 @@ try {
     res.status(400).json({ message: error.message });
 }
 });
+
 
 // DELETE a product
 router.delete("/:id", [auth, getProduct], async (req, res, next) => {
