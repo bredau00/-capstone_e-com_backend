@@ -9,7 +9,7 @@ const router = express.Router();
 
 
 // GET all products
-router.get("/", auth, async (req, res) => {
+router.get("/", async (req, res) => {
 try {
     const products = await Product.find();
     res.status(201).send(products);

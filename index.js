@@ -22,7 +22,7 @@ app.use(cors());
 
 app.get("/", (req, res, next) => {
     res.send({
-      message: "Welcome to our Point of Sale API",
+      message: "Welcome to Modern Junkies API",
   });
 });
 
