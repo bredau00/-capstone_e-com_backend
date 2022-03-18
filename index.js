@@ -7,6 +7,8 @@ const cors = require("cors");
 const productRouter = require("./routes/productRouter");
 const userRouter = require("./routes/userRouter");
 const adminRouter = require("./routes/adminRouter");
+const contactRouter = require("./routes/contactRouter");
+
 
 // Setting up MongoDB connection
 mongoose.connect(process.env.DB_LINK, { useNewUrlParser: true });
@@ -29,6 +31,7 @@ app.get("/", (req, res, next) => {
 app.use("/users", userRouter);
 app.use("/products", productRouter);
 app.use("/admins", adminRouter);
+app.use("/contact", contactRouter);
 
 
 app.listen(app.get("port"), (server) => {

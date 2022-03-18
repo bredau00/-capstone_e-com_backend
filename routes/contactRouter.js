@@ -19,11 +19,14 @@ app.post("/", (req, res) => {
 });
 
 const mailOptions = {
-    from: email,
-    to: "manmodern88@gmail.com",
+    from: `${email}`,
+    to: `${process.env.EMAIL}`,
     subject: "New message from store",
-    text: `${name} has messaged you, saying:
-    ${message}`,
+    text: `${name}  has messaged you, saying:
+
+    ${message},
+
+    get back to them on ${email}`,
 };
 
 transporter.sendMail(mailOptions, function (error, info) {
