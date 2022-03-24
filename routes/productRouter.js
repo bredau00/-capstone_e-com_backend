@@ -20,13 +20,13 @@ try {
 
 
 // GET one product
-router.get("/:id", [auth, getProduct], (req, res, next) => {
+router.get("/:id", getProduct, (req, res, next) => {
 res.send(res.product);
 });
 
 
 // CREATE a product
-router.post("/", auth, async (req, res, next) => {
+router.post("/", async (req, res, next) => {
 const { title, category, img_front, img_back, price, created_by } = req.body;
 
 let product = new Product({
@@ -35,7 +35,7 @@ let product = new Product({
         img_front,
         img_back,
         price,
-        created_by: req.admin._id,
+        created_by: req.user._id,
 })
 try {
     const newProduct = await product.save();
@@ -47,7 +47,7 @@ try {
 
 
 // UPDATE a product
-router.put("/:id", [auth, getProduct], async (req, res, next) => {
+router.put("/:id", getProduct, async (req, res, next) => {
     
 const { title, category, img, price } = req.body;
 if (title) res.product.title = title;
@@ -66,7 +66,7 @@ try {
 
 
 // DELETE a product
-router.delete("/:id", [auth, getProduct], async (req, res, next) => {
+router.delete("/:id", getProduct, async (req, res, next) => {
 
 try {
     await res.product.remove();

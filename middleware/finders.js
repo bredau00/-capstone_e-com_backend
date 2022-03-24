@@ -1,6 +1,5 @@
 const User = require("../models/users");
 const Product = require("../models/products");
-const Admin = require("../models/admins");
 
 async function getUser(req, res, next) {
   let user;
@@ -28,17 +27,4 @@ async function getProduct(req, res, next) {
   next();
 }
 
-async function getAdmin(req, res, next) {
-  let admin;
-  try {
-    admin = await Admin.findById(req.params.id);
-
-    if (!admin) res.status(404).json({ message: "Could not find admin" });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-  res.admin = admin;
-  next();
-}
-
-module.exports = { getUser, getProduct, getAdmin };
+module.exports = { getUser, getProduct };

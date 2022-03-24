@@ -14,5 +14,27 @@ jwt.verify(token, process.env.MONGO_PASS, (err, admin) => {
     return next();
 });
 }
-
-module.exports = authenticateToken;
+const authTokenAndAuthorization = (req, res, next) => {
+    authenticateToken(req, res, () => {
+        if (req.user.id === req.params.id || req.params.id || req.user.isAdmin) {
+            next();
+        } else {
+        res.status(403).json("You are not admin!!");
+        }
+    });
+};
+const authTokenAndAdmin = (req, res, next) => {
+    authenticateToken(req, res, () => {
+        if (req.user.isAdmin) {
+            next();
+        } else {
+        res.status(403).json("You are not admin");
+        }
+    });
+    };
+    
+module.exports = {
+    authenticateToken,
+    authTokenAndAuthorization,
+    authTokenAndAdmin,
+};
