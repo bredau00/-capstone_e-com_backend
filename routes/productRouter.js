@@ -2,7 +2,7 @@ require("dotenv").config;
 
 const express = require("express");
 const Product = require("../models/products");
-const auth = require("../middleware/auth");
+const {authenticateToken} = require("../middleware/auth");
 const { getProduct } = require("../middleware/finders");
 
 const router = express.Router();
@@ -26,7 +26,7 @@ res.send(res.product);
 
 
 // CREATE a product
-router.post("/", async (req, res, next) => {
+router.post("/", authenticateToken, async  (req, res, next) => {
 const { title, category, img_front, img_back, price, created_by } = req.body;
 
 let product = new Product({
@@ -35,7 +35,6 @@ let product = new Product({
         img_front,
         img_back,
         price,
-        created_by: req.user._id,
 })
 try {
     const newProduct = await product.save();
@@ -66,7 +65,7 @@ try {
 
 
 // DELETE a product
-router.delete("/:id", getProduct, async (req, res, next) => {
+router.delete("/:id", getProduct, authenticateToken, async (req, res, next) => {
 
 try {
     await res.product.remove();

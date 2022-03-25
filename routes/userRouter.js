@@ -35,7 +35,7 @@ router.patch("/", async (req, res, next) => {
         JSON.stringify(user),
         process.env.MONGO_PASS
         );
-        res.status(201).json({ jwt: access_token, role:user.isAdmin });
+        res.status(201).json({ jwt: access_token });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

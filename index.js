@@ -6,7 +6,6 @@ const cors = require("cors");
 
 const productRouter = require("./routes/productRouter");
 const userRouter = require("./routes/userRouter");
-const adminRouter = require("./routes/adminRouter");
 const contactRouter = require("./routes/contactRouter");
 
 
@@ -24,13 +23,12 @@ app.use(cors());
 
 app.get("/", (req, res, next) => {
     res.send({
-      message: "Welcome to Modern Junkies API",
+      message: "Welcome to The Modern Man API",
   });
 });
 
 app.use("/users", userRouter);
 app.use("/products", productRouter);
-app.use("/admins", adminRouter);
 app.use("/contact", contactRouter);
 
 
